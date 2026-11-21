@@ -65,3 +65,14 @@ Final APK verification (APKs downloaded from the release URLs and inspected with
 | `AYMAN-DECK.apk` | `com.ayman.macrodeck.mobile` | 2 | `0.1.9` | `7cbc14fdec68291ce7e286b2fabcd3eb5d073bdd39fa8ff8c8f7567b9af77a19` — matches `android/app/debug.keystore` |
 
 Both published `.sha256` files match the downloaded APKs.
+
+## 5. SOStore's own release
+
+| File | Change |
+|---|---|
+| `app/debug.keystore` (new) | Committed debug signing key for the store APK, so future store updates keep one signature. |
+| `app/build.gradle.kts` | Added a `signingConfigs.debug` block pointing at the committed keystore. |
+| `.github/workflows/store-apk.yml` (new) | On tag `v*`: builds `assembleDebug` with Java 17, publishes `SOStore.apk` + `SOStore.apk.sha256` to a GitHub Release (`draft: false`, `prerelease: false`, `overwrite_files: true`). |
+| `RELEASE-PLAYBOOK.md` | Added the store tag command and the third keystore note. |
+
+Verified: `.\gradlew.bat assembleDebug` succeeds with the committed keystore. Tag `v1.0.0` publishes the release.

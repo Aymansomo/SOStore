@@ -1,0 +1,54 @@
+name: Store APK
+
+# Builds SOStore and publishes the APK to GitHub Releases.
+#   git tag v1.0.0
+#   git push origin v1.0.0
+#
+# Keep the tag version in sync with versionName in app/build.gradle.kts.
+# app/debug.keystore is committed so future store updates keep the same signature.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build store APK
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:assembleDebug --console=plain --no-daemon
+
+      - name: Collect APK
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/app-debug.apk dist/SOStore.apk
+          sha256sum dist/SOStore.apk > dist/SOStore.apk.sha256
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SOStore-apk
+          path: dist/*
+
+      - name: Attach APK to the GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          draft: false
+          prerelease: false
+          overwrite_files: true
+          generate_release_notes: true

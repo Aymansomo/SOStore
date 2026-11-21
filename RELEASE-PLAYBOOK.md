@@ -30,7 +30,16 @@ git tag mobile-v0.1.9
 git push origin mobile-v0.1.9
 ```
 
-The store is its own repo (`Aymansomo/SOStore`); build/install it locally with:
+Store itself — `Aymansomo/SOStore` now has `.github/workflows/store-apk.yml`, which publishes `SOStore.apk` on a `v*` tag:
+
+```powershell
+cd "E:\ayman\Development\My_progicte\ME\Store SOMO"
+# commit and push any store changes first, then:
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+Locally you can still build/install directly:
 
 ```powershell
 $env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
@@ -44,13 +53,13 @@ $env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
    - Music: `Navic/app/build.gradle.kts` (currently `v1.0.0-beta07`, code `65`).
    - Macro: `mobile-app/android/app/build.gradle` and `mobile-app/package.json`.
 3. Commit and push to `main`.
-4. Push a matching tag (`android-v…` or `mobile-v…`).
+4. Push a matching tag (`android-v…`, `mobile-v…`, or `v…` for the store).
 5. Wait for the **Android APK** workflow to finish; it publishes a release with the APK.
 6. Open the store, refresh, tap **Update**.
 
 ## Important notes
 
-- Both apps now use a committed debug keystore so APK signatures stay identical. Keep both `debug.keystore` files; if one is lost, existing installs must be uninstalled before the next update.
+- Both apps and the store now use a committed debug keystore so APK signatures stay identical. Keep all three `debug.keystore` files; if one is lost, existing installs must be uninstalled before the next update.
 - Old SOPlayer releases (`beta05`, `beta06`) were signed with different per-run keys. Anyone who installed them must uninstall once before installing `beta07`. After that, updates work normally.
 - `paige.navic.debug` (not `paige.navic`) is correct: CI builds the `defaultDebug` variant, which adds the `.debug` suffix.
 - Releases must stay **published** and **non-prerelease**; drafts and prereleases are ignored by the store.

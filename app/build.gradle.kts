@@ -19,6 +19,17 @@ android {
         versionName = "1.0.0"
     }
 
+    signingConfigs {
+        // Committed debug keystore: keeps the store's signature stable across CI
+        // releases so future versions can be installed over this one.
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
