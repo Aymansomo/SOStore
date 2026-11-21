@@ -47,3 +47,21 @@ The PC app stays in `Aymansomo/ayman-macro-deck`; the mobile app now has its own
 PC repo `Aymansomo/ayman-macro-deck`: the previously pushed `mobile-app/` files and `mobile-apk.yml` were removed from the repo, `mobile-app/` was added to `.gitignore`, and `.freebuff/` (local logs) was also ignored. Local files were left untouched.
 
 Verified: `npm run build` succeeds (TypeScript check + Vite build).
+
+## 4. Tags and published releases (final outcome)
+
+| Repo | Tag | Commit | Release assets |
+|---|---|---|---|
+| `Aymansomo/SOPlayer` | `android-v1.0.0-beta07` | `cb88a8a` | `SOPlayer.apk`, `SOPlayer.apk.sha256` |
+| `Aymansomo/SOMacro-mobile` | `mobile-v0.1.9` | `e701645` | `AYMAN-DECK.apk`, `AYMAN-DECK.apk.sha256`, `index.html` |
+
+Both releases are published (`draft: false`, `prerelease: false`). The `beta07` tag originally pointed at the pre-fix commit `8f3c81b`; it was force-moved to `cb88a8a` after the signing/version fixes. The SOPlayer workflow also gained `overwrite_files: true` (commit `cb88a8a`) so the correct APK replaces the asset even if an older workflow run finishes last.
+
+Final APK verification (APKs downloaded from the release URLs and inspected with Android SDK build-tools 36.0.0):
+
+| APK | Package | versionCode | versionName | Signer SHA-256 |
+|---|---|---|---|---|
+| `SOPlayer.apk` | `paige.navic.debug` | 65 | `v1.0.0-beta07` | `149a1819e13953e1acb2dd0f2ca5edf6793940e066c8bda486a36d4b6740c0bd` — matches `Navic/app/debug.keystore` |
+| `AYMAN-DECK.apk` | `com.ayman.macrodeck.mobile` | 2 | `0.1.9` | `7cbc14fdec68291ce7e286b2fabcd3eb5d073bdd39fa8ff8c8f7567b9af77a19` — matches `android/app/debug.keystore` |
+
+Both published `.sha256` files match the downloaded APKs.
