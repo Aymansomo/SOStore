@@ -5,7 +5,7 @@
 | App | Repo | Installed package (the store checks this) | Tag pattern | APK asset |
 |---|---|---|---|---|
 | SOPlayer (music) | `Aymansomo/SOPlayer` | `paige.navic.debug` | `android-v1.0.0-beta07` | `SOPlayer.apk` |
-| AYMAN DECK (macro) | `Aymansomo/ayman-macro-deck` | `com.ayman.macrodeck.mobile` | `mobile-v0.1.9` | `AYMAN-DECK.apk` |
+| AYMAN DECK (macro) | `Aymansomo/SOMacro-mobile` | `com.ayman.macrodeck.mobile` | `mobile-v0.1.9` | `AYMAN-DECK.apk` |
 
 The store fetches `/repos/{owner}/{repo}/releases`, ignores drafts/prereleases, picks the newest release that actually contains an `.apk`, and compares its tag with the installed `versionName`.
 
@@ -22,18 +22,15 @@ git tag android-v1.0.0-beta07
 git push origin android-v1.0.0-beta07
 ```
 
-Macro app — the `mobile-app/` folder was never committed, so add it together with the new workflow:
+Macro app — already pushed to `SOMacro-mobile`; just tag to publish the APK:
 
 ```powershell
-cd "E:\ayman\Development\My_progicte\ME\macro app\ayman-macro-deck"
-git add .github/workflows/mobile-apk.yml mobile-app/
-git commit -m "Add mobile APK release workflow"
-git push origin main
+cd "E:\ayman\Development\My_progicte\ME\macro app\ayman-macro-deck\mobile-app"
 git tag mobile-v0.1.9
 git push origin mobile-v0.1.9
 ```
 
-The store itself is not a git repo; build/install it locally with:
+The store is its own repo (`Aymansomo/SOStore`); build/install it locally with:
 
 ```powershell
 $env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"

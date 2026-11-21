@@ -53,7 +53,7 @@ object AppCatalogConfig {
             name = "AYMAN DECK",
             packageName = "com.ayman.macrodeck.mobile",
             githubOwner = "Aymansomo",
-            githubRepo = "ayman-macro-deck",
+            githubRepo = "SOMacro-mobile",
             description = "Macro deck mobile companion."
         )
     )

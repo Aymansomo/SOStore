@@ -6,7 +6,7 @@ This file records every change made to connect the store with the two app reposi
 
 | File | Change |
 |---|---|
-| `app/src/main/java/com/example/myappstore/AppCatalogConfig.kt` | Replaced placeholder catalog entries with the real apps: `Aymansomo/SOPlayer` (`paige.navic.debug`) and `Aymansomo/ayman-macro-deck` (`com.ayman.macrodeck.mobile`). Updated the tag-format documentation. `GITHUB_TOKEN` stays empty (public repos). |
+| `app/src/main/java/com/example/myappstore/AppCatalogConfig.kt` | Replaced placeholder catalog entries with the real apps: `Aymansomo/SOPlayer` (`paige.navic.debug`) and `Aymansomo/SOMacro-mobile` (`com.ayman.macrodeck.mobile`). Updated the tag-format documentation. `GITHUB_TOKEN` stays empty (public repos). |
 | `app/src/main/AndroidManifest.xml` | `<queries>` now lists `paige.navic.debug` and `com.ayman.macrodeck.mobile` so Android 11+ can see installed versions. |
 | `app/src/main/java/com/example/myappstore/domain/VersionUtils.kt` | `normalize()` now strips `v`, `android-v` and `mobile-v` tag prefixes instead of only a leading `v`. |
 | `app/src/main/java/com/example/myappstore/data/GitHubModels.kt` | Added `draft` to `GitHubReleaseDto` so drafts can be filtered out. |
@@ -30,16 +30,20 @@ Important finding: the CI APK is the `defaultDebug` variant, so its real package
 
 Verified: `./gradlew.bat :app:tasks` configuration succeeds.
 
-## 3. Macro app — `E:\ayman\Development\My_progicte\ME\macro app\ayman-macro-deck` (repo `Aymansomo/ayman-macro-deck`)
+## 3. Macro mobile app — `E:\ayman\Development\My_progicte\ME\macro app\ayman-macro-deck\mobile-app` (repo `Aymansomo/SOMacro-mobile`)
 
-| File | Change |
+The PC app stays in `Aymansomo/ayman-macro-deck`; the mobile app now has its own repository.
+
+| File (paths below are relative to `mobile-app/`) | Change |
 |---|---|
 | `.github/workflows/mobile-apk.yml` (new) | On tag `mobile-v*`: `npm ci` → `npm run build` → `npx cap sync android` → signed `assembleDebug` → upload artifact → publish a release with `AYMAN-DECK.apk` and its SHA-256. |
-| `mobile-app/android/app/build.gradle` | Added `signingConfigs.debug` using the committed keystore; `versionCode` 1 → 2, `versionName` `1.0` → `0.1.9`. |
-| `mobile-app/android/app/debug.keystore` (new) | Fixed debug signing key for APK updates. |
-| `mobile-app/package.json` | `version` `0.1.0` → `0.1.9`. |
-| `mobile-app/.gitignore` | Added `releases/` and `*.apk` to keep local release builds out of git. |
-| `.gitignore` (root) | Added `.freebuff/` (local logs) to the ignore list. |
-| `mobile-app/` (whole folder) | Was untracked and never pushed; now added to the repo (source, Capacitor Android project, lockfile, config). |
+| `android/app/build.gradle` | Added `signingConfigs.debug` using the committed keystore; `versionCode` 1 → 2, `versionName` `1.0` → `0.1.9`. |
+| `android/app/debug.keystore` (new) | Fixed debug signing key for APK updates. |
+| `package.json` | `version` `0.1.0` → `0.1.9`. |
+| `.gitignore` | Added `releases/`, `*.apk`, `.idea/`, `.gradle/`, `build/` to keep local builds out of git. |
+| `README.md` (new) | Project overview, signing note, local build command. |
+| Whole folder | Was untracked and never pushed; initialized as `SOMacro-mobile` and pushed as "first commit" (source, Capacitor Android project, lockfile, config). |
+
+PC repo `Aymansomo/ayman-macro-deck`: the previously pushed `mobile-app/` files and `mobile-apk.yml` were removed from the repo, `mobile-app/` was added to `.gitignore`, and `.freebuff/` (local logs) was also ignored. Local files were left untouched.
 
 Verified: `npm run build` succeeds (TypeScript check + Vite build).
