@@ -1,0 +1,19 @@
+# Local machine config
+local.properties
+*.local
+
+# Build outputs
+.gradle/
+.kotlin/
+build/
+app/build/
+*.apk
+
+# IDE / tooling caches
+.idea/
+.freebuff/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
