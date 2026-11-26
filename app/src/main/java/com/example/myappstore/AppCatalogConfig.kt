@@ -55,6 +55,14 @@ object AppCatalogConfig {
             githubOwner = "Aymansomo",
             githubRepo = "SOMacro-mobile",
             description = "Macro deck mobile companion."
+        ),
+        CatalogApp(
+            id = "prism",
+            name = "Prism",
+            packageName = "com.prism.music",
+            githubOwner = "Aymansomo",
+            githubRepo = "Prism",
+            description = "Personal music player with offline library, lyrics and mixing."
         )
     )
 

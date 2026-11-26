@@ -8,6 +8,7 @@ Personal Android app store for my own apps. It reads GitHub Releases for each co
 |---|---|---|
 | SOPlayer | `Aymansomo/SOPlayer` | `paige.navic.debug` |
 | AYMAN DECK | `Aymansomo/SOMacro-mobile` | `com.ayman.macrodeck.mobile` |
+| Prism | `Aymansomo/Prism` | `com.prism.music` |
 
 ## How it works
 

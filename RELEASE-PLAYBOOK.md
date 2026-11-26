@@ -6,6 +6,7 @@
 |---|---|---|---|---|
 | SOPlayer (music) | `Aymansomo/SOPlayer` | `paige.navic.debug` | `android-v1.0.0-beta07` | `SOPlayer.apk` |
 | AYMAN DECK (macro) | `Aymansomo/SOMacro-mobile` | `com.ayman.macrodeck.mobile` | `mobile-v0.1.9` | `AYMAN-DECK.apk` |
+| Prism (music) | `Aymansomo/Prism` | `com.prism.music` | `v1.8.8` | `Prism.apk` |
 
 The store fetches `/repos/{owner}/{repo}/releases`, ignores drafts/prereleases, picks the newest release that actually contains an `.apk`, and compares its tag with the installed `versionName`.
 

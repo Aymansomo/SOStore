@@ -14,6 +14,7 @@
     <queries>
         <package android:name="paige.navic.debug" />
         <package android:name="com.ayman.macrodeck.mobile" />
+        <package android:name="com.prism.music" />
     </queries>
 
     <application
